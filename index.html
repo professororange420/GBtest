@@ -21,8 +21,9 @@
 <body>
     <div id="game"></div>
     <script>
-        // Function to load and initialize the emulator
-        function initializeEmulator() {
+        // Inline the necessary parts of the EmulatorJS loader script
+        (function() {
+            // EmulatorJS configuration
             window.EJS_player = "#game";
             window.EJS_core = "gb";
             window.EJS_gameName = "Pokemon Yellow";
@@ -30,40 +31,26 @@
             window.EJS_startOnLoaded = true;
             window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
             window.EJS_gameUrl = "Pokemon - Yellow Version (UE) [C][!].gbc";
-            window.EJS_biosUrl = "https://cdn.emulatorjs.org/stable/data/gbc_bios.bin";
+            window.EJS_biosUrl = "https://cdn.emulatorjs.org/stable/data/gbc_bios.bin"; // Ensure this path is accessible
 
             // Load the emulator script
             var script = document.createElement('script');
-            script.src = "https://cdn.emulatorjs.org/stable/data/loader.js";
+            script.src = "https://cdn.emulatorjs.org/stable/data/loader.js"; // Ensure this path is accessible
             script.onload = function() {
                 console.log('EmulatorJS loaded successfully.');
-                if (typeof window.EJS_init === 'function') {
-                    window.EJS_init();
-                } else {
-                    console.error('EmulatorJS initialization function not found.');
-                }
+                // Simulate a click after 5 seconds
+                setTimeout(() => {
+                    // Create and dispatch a click event
+                    var event = new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    document.querySelector('#game').dispatchEvent(event);
+                }, 5000); // 5000 milliseconds = 5 seconds
             };
             document.head.appendChild(script);
-        }
-
-        // Try to load the emulator immediately
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeEmulator();
-
-            // Check and simulate interaction if necessary
-            var gameDiv = document.getElementById('game');
-            if (gameDiv) {
-                gameDiv.dispatchEvent(new Event('click')); // Attempt to simulate click
-            }
-        });
-
-        // For further compatibility, try triggering a click event in different ways
-        document.addEventListener('click', function() {
-            var gameDiv = document.getElementById('game');
-            if (gameDiv) {
-                gameDiv.dispatchEvent(new Event('click')); // Simulate interaction
-            }
-        });
+        })();
     </script>
 </body>
 </html>
