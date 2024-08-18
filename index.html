@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Yellow Emulator</title>
+    <title>Interactive Emulator</title>
     <style>
         body, html {
             margin: 0;
@@ -23,13 +23,6 @@
     <script>
         // Inline the necessary parts of the EmulatorJS loader script
         (function() {
-            function loadScript(url, callback) {
-                var script = document.createElement('script');
-                script.src = url;
-                script.onload = callback;
-                document.head.appendChild(script);
-            }
-
             // EmulatorJS configuration
             window.EJS_player = "#game";
             window.EJS_core = "gb";
@@ -38,12 +31,15 @@
             window.EJS_startOnLoaded = true;
             window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
             window.EJS_gameUrl = "Pokemon - Yellow Version (UE) [C][!].gbc";
-            window.EJS_biosUrl = "gbc_bios.bin";
+            window.EJS_biosUrl = "https://cdn.emulatorjs.org/stable/data/gbc_bios.bin"; // Ensure this path is accessible
 
             // Load the emulator script
-            loadScript("https://cdn.emulatorjs.org/stable/data/loader.js", function() {
+            var script = document.createElement('script');
+            script.src = "https://cdn.emulatorjs.org/stable/data/loader.js"; // Ensure this path is accessible
+            script.onload = function() {
                 console.log('EmulatorJS loaded successfully.');
-            });
+            };
+            document.head.appendChild(script);
         })();
     </script>
 </body>
