@@ -3,44 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Emulator</title>
+    <title>Emulator NFT</title>
+    <script src="/Users/Cody/GBtest/data/src/emulator.js"></script> <!-- Replace with actual path -->
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        #game {
-            width: 100%;
-            height: 100%;
-        }
+        body { margin: 0; }
+        canvas { display: block; }
     </style>
 </head>
 <body>
-    <div id="game"></div>
+    <canvas id="emulatorCanvas"></canvas>
     <script>
-        // Inline the necessary parts of the EmulatorJS loader script
-        (function() {
-            // EmulatorJS configuration
-            window.EJS_player = "#game";
-            window.EJS_core = "gb";
-            window.EJS_gameName = "Pokemon Yellow";
-            window.EJS_color = "#0064ff";
-            window.EJS_startOnLoaded = true;
-            window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
-            window.EJS_gameUrl = "Pokemon - Yellow Version (UE) [C][!].gbc";
-            window.EJS_biosUrl = "https://cdn.emulatorjs.org/stable/data/gbc_bios.bin"; // Ensure this path is accessible
+        const canvas = document.getElementById('emulatorCanvas');
+        const context = canvas.getContext('2d');
+        
+        // Set up canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            // Load the emulator script
-            var script = document.createElement('script');
-            script.src = "https://cdn.emulatorjs.org/stable/data/loader.js"; // Ensure this path is accessible
-            script.onload = function() {
-                console.log('EmulatorJS loaded successfully.');
-            };
-            document.head.appendChild(script);
-        })();
+        // Initialize and run the emulator
+        function initializeEmulator() {
+            // EmulateJS initialization code
+            // For example, loading a ROM and setting up the emulator
+            const emulator = new EmulateJS({
+                canvas: canvas,
+                // Other configuration options
+            });
+
+            emulator.loadROM('/Users/Cody/GBtest/Pokemon - Yellow Version (UE) [C][!].gbc'); // Replace with actual ROM file path
+            emulator.start();
+        }
+
+        initializeEmulator();
     </script>
 </body>
 </html>
