@@ -15,15 +15,43 @@
         #game {
             width: 100%;
             height: 100%;
+            background-color: white; /* Ensure the background is visible for clicking */
         }
     </style>
 </head>
 <body>
     <div id="game"></div>
     <script>
-        // Inline the necessary parts of the EmulatorJS loader script
-        (function() {
-            // EmulatorJS configuration
+        // Function to simulate clicks
+        function simulateClicks() {
+            const gameDiv = document.getElementById('game');
+            if (!gameDiv) return;
+
+            let clickCount = 0;
+            const maxClicks = 4;
+            const interval = 1000; // 1 second
+            const startDelay = 4000; // 4 seconds
+
+            function click() {
+                if (clickCount >= maxClicks) return;
+
+                const clickEvent = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+
+                gameDiv.dispatchEvent(clickEvent);
+                console.log(`Simulated click ${clickCount + 1}`);
+                clickCount++;
+                setTimeout(click, interval);
+            }
+
+            setTimeout(click, startDelay);
+        }
+
+        // Function to load and initialize the emulator
+        function initializeEmulator() {
             window.EJS_player = "#game";
             window.EJS_core = "gb";
             window.EJS_gameName = "Pokemon Yellow";
@@ -31,26 +59,26 @@
             window.EJS_startOnLoaded = true;
             window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
             window.EJS_gameUrl = "Pokemon - Yellow Version (UE) [C][!].gbc";
-            window.EJS_biosUrl = "https://cdn.emulatorjs.org/stable/data/gbc_bios.bin"; // Ensure this path is accessible
+            window.EJS_biosUrl = "https://cdn.emulatorjs.org/stable/data/gbc_bios.bin";
 
-            // Load the emulator script
             var script = document.createElement('script');
-            script.src = "https://cdn.emulatorjs.org/stable/data/loader.js"; // Ensure this path is accessible
+            script.src = "https://cdn.emulatorjs.org/stable/data/loader.js";
             script.onload = function() {
                 console.log('EmulatorJS loaded successfully.');
-                // Simulate a click after 5 seconds
-                setTimeout(() => {
-                    // Create and dispatch a click event
-                    var event = new MouseEvent('click', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: true
-                    });
-                    document.querySelector('#game').dispatchEvent(event);
-                }, 5000); // 5000 milliseconds = 5 seconds
+                if (typeof window.EJS_init === 'function') {
+                    window.EJS_init();
+                } else {
+                    console.error('EmulatorJS initialization function not found.');
+                }
             };
             document.head.appendChild(script);
-        })();
+        }
+
+        // Start initialization and simulate clicks after a delay
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeEmulator();
+            simulateClicks();
+        });
     </script>
 </body>
 </html>
