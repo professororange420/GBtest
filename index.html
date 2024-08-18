@@ -1,27 +1,48 @@
-<html>
-    <head>
-        <!--HTML file auto generated using EmulatorJS codehelper-->
-        <style>
-            body, html {
-                margin: 0;
-                padding: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div style="width:100%;height:100%;max-width:100%">
-            <div id="game"></div>
-        </div>
-        <script>
-            EJS_player = "#game";
-            EJS_core = "gb";
-            EJS_gameName = "Pokemon Yellow";
-            EJS_color = "#0064ff";
-            EJS_startOnLoaded = true;
-            EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
-            EJS_gameUrl = "Pokemon - Yellow Version (UE) [C][!].gbc";
-            EJS_biosUrl = "gbc_bios.bin";
-        </script>
-        <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Yellow Emulator</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        // EmulatorJS configuration
+        const canvas = document.getElementById('gameCanvas');
+        const context = canvas.getContext('2d');
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // EmulatorJS configuration variables
+        window.EJS_player = canvas;
+        window.EJS_core = "gb";
+        window.EJS_gameName = "Pokemon Yellow";
+        window.EJS_color = "#0064ff";
+        window.EJS_startOnLoaded = true;
+        window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+        window.EJS_gameUrl = "Pokemon - Yellow Version (UE) [C][!].gbc";
+        window.EJS_biosUrl = "gbc_bios.bin";
+
+        // Load EmulatorJS script
+        const script = document.createElement('script');
+        script.src = "https://cdn.emulatorjs.org/stable/data/loader.js";
+        document.body.appendChild(script);
+    </script>
+</body>
 </html>
