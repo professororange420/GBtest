@@ -21,25 +21,30 @@
 <body>
     <div id="game"></div>
     <script>
-        // EmulatorJS configuration
-        window.EJS_player = "#game";
-        window.EJS_core = "gb";
-        window.EJS_gameName = "Pokemon Yellow";
-        window.EJS_color = "#0064ff";
-        window.EJS_startOnLoaded = true;
-        window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
-        window.EJS_gameUrl = "Pokemon - Yellow Version (UE) [C][!].gbc";
-        window.EJS_biosUrl = "gbc_bios.bin";
+        // Inline the necessary parts of the EmulatorJS loader script
+        (function() {
+            function loadScript(url, callback) {
+                var script = document.createElement('script');
+                script.src = url;
+                script.onload = callback;
+                document.head.appendChild(script);
+            }
 
-        // Load EmulatorJS script
-        const script = document.createElement('script');
-        script.src = "https://cdn.emulatorjs.org/stable/data/loader.js";
-        document.body.appendChild(script);
+            // EmulatorJS configuration
+            window.EJS_player = "#game";
+            window.EJS_core = "gb";
+            window.EJS_gameName = "Pokemon Yellow";
+            window.EJS_color = "#0064ff";
+            window.EJS_startOnLoaded = true;
+            window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+            window.EJS_gameUrl = "Pokemon - Yellow Version (UE) [C][!].gbc";
+            window.EJS_biosUrl = "gbc_bios.bin";
 
-        // Optional: Handle script load event
-        script.onload = () => {
-            console.log('EmulatorJS loaded successfully.');
-        };
+            // Load the emulator script
+            loadScript("https://cdn.emulatorjs.org/stable/data/loader.js", function() {
+                console.log('EmulatorJS loaded successfully.');
+            });
+        })();
     </script>
 </body>
 </html>
