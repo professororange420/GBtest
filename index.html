@@ -40,13 +40,22 @@
                 console.log('EmulatorJS loaded successfully.');
                 // Initialize the emulator after the script has loaded
                 if (typeof window.EJS_init === 'function') {
-                    window.EJS_init();
+                    window.EJS_init(); // Attempt to initialize the emulator
                 } else {
                     console.error('EmulatorJS initialization function not found.');
                 }
             };
             document.head.appendChild(script);
         })();
+        
+        // Simulate user interaction if necessary
+        // Uncomment and adjust if your environment requires a simulated user click
+        document.addEventListener('DOMContentLoaded', function() {
+            var canvas = document.querySelector('#game');
+            if (canvas) {
+                canvas.click(); // Simulate a click on the canvas if needed
+            }
+        });
     </script>
 </body>
 </html>
